@@ -11,5 +11,15 @@
  *= require_self
  *= require_tree .
  *= require 'bootstrap'
- *= require 'bootstrap-sass'
+
  */
+
+.jumbotron {
+  width: 50%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+#margin {
+  margin: 15px 0px;
+}

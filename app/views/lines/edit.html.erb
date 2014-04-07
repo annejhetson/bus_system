@@ -1,0 +1,7 @@
+<% content_for(:title, "Edit Line | BusSystem") %>
+
+<h1 class="jumbotron">Edit <%= @line.name %></h1>
+<%#= render 'layouts/form', object: @line %>
+<%= render 'form', object: @line %>
+
+<%= link_to "Back to All Lines", lines_path, :class => "btn btn-primary" %>

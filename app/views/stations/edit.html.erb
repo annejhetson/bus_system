@@ -1,0 +1,6 @@
+<% content_for(:title, "Edit Station | BusSystem") %>
+
+<h1 class="jumbotron">Edit <%= @station.name %></h1>
+<%= render 'form', object: @station %>
+
+<%= link_to "Back to All Stations", stations_path, :class => "btn btn-primary" %>

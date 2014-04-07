@@ -1,0 +1,16 @@
+<%= form_for(object) do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="checkboxes">
+    <strong>Stations:</strong>
+    </br>
+    <% @stations.each do |station| %>
+      <input type="checkbox" name="station_ids[]" value="<%= station.id %>"><%= station.name %></br>
+    <% end %>
+  </div>
+
+  <%= f.submit(:class => "btn btn-warning", :id => "margin") %>
+<% end %>

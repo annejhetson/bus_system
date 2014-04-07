@@ -1,0 +1,15 @@
+<% content_for(:title, "Stations | BusSystem") %>
+
+<h1 class="jumbotron">Stations</h1>
+
+<h2>All stations</h2>
+<ul>
+  <% @stations.each do |station| %>
+    <li><%= link_to station.name, station_path(station) %></li>
+  <% end %>
+</ul>
+
+<hr>
+
+<h3>Add new station</h3>
+<%= render 'form', object: @station %>

@@ -1,0 +1,19 @@
+<% content_for(:title, "Line | BusSystem") %>
+
+<h1 class="jumbotron"><%= @line.name.capitalize %> Line</h1>
+<h3>Stations</h3>
+<ul>
+  <% @line.stops.each do |stop| %>
+    <li><%= link_to Station.find(stop.station_id).name, station_path(stop.station_id) %></li>
+  <% end %>
+</ul>
+
+
+<%= link_to "Edit", edit_line_path(@line), :class => "btn btn-success" %>
+<%= link_to "Delete", line_path(@line),
+                    :confirm => "Are you sure?",
+                    :method => "delete",
+                    :class => "btn btn-danger" %>
+
+<p><%= link_to "Back to All Lines", lines_path, :class => "btn btn-primary", :id => "margin" %></p>
+
