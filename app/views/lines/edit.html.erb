@@ -2,6 +2,7 @@
 
 <h1 class="jumbotron">Edit <%= @line.name %></h1>
 <%#= render 'layouts/form', object: @line %>
-<%= render 'form', object: @line %>
+<%= render('layouts/errors', :object => @line) %>
+<%= render 'form' %>
 
 <%= link_to "Back to All Lines", lines_path, :class => "btn btn-primary" %>

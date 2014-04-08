@@ -12,4 +12,6 @@
 <hr>
 
 <h3>Add new station</h3>
-<%= render 'form', object: @station %>
+
+<%= render('layouts/errors', :object => @station) %>
+<%= render 'form' %>

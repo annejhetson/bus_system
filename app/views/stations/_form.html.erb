@@ -1,14 +1,13 @@
-<%= form_for(object) do |f| %>
+<%= form_for(@station) do |f| %>
   <div class="form-group">
     <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
 
-  <div class="checkboxes">
-    <strong>Lines:</strong>
-    </br>
+  <div class="form-group">
     <% @lines.each do |line| %>
-      <input type="checkbox" name="line_ids[]" value="<%= line.id %>" <%# checked="<%= @station.stops.line_id %>><%= line.name %></br>
+      <%= check_box_tag "line_ids[]", line.id, @station.line_ids.include?(line.id) %>
+      <%= line.name %><br>
     <% end %>
   </div>
 

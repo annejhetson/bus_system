@@ -7,16 +7,18 @@ class LinesController < ApplicationController
   end
 
   def create
-    @line = Line.new(params[:line])
+    @stations = Station.all
+    @line = Line.new(params.require(:line).permit(:name))
     if @line.save
-
-      params[:station_ids].each do |stationID|
-        @line.stops.create({station_id: stationID, line_id: @line.id})
+      if params[:station_ids] != nil
+        params[:station_ids].each do |stationID|
+          @line.stops.create({station_id: stationID, line_id: @line.id})
+        end
       end
-      # params[:line][:slug] = ("#{@line.id}-#{@line.name}").parameterize
-      # @line.update(params[:line]) ## will fix this later!!!
+
       flash[:notice] = "#{@line.name.capitalize} has been saved"
       redirect_to line_path(@line)
+
     else
       render 'index'
     end
@@ -33,10 +35,14 @@ class LinesController < ApplicationController
 
   def update
     @line = Line.find(params[:id])
-    if @line.update(params[:line])
+    if @line.update(params.require(:line).permit(:name))
+      if @line.stops[0] != nil
+        stops_to_destroy = Stop.where("line_id = #{@line.id}")
+        stops_to_destroy.each { |stop| stop.destroy }
+      end
 
       params[:station_ids].each do |stationID|
-        @line.stops.create({station_id: stationID, line_id: @line.id})
+        Stop.create({station_id: stationID, line_id: @line.id})
       end
 
       flash[:notice] = "#{@line.name.capitalize} has been updated"

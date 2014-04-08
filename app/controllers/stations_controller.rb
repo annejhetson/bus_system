@@ -8,19 +8,19 @@ class StationsController < ApplicationController
 
   def create
     @lines = Line.all
-    @station = Station.new(params[:station])
+    @station = Station.new(params.require(:station).permit(:name))
     if @station.save
-      # params[:station][:slug] = ("#{@station.id}-#{@station.name}").parameterize
-      # @station.update(params[:station]) ## will fix this later!!!
-
-      params[:line_ids].each do |lineId|
-        @station.stops.create({station_id: @station.id, line_id: lineId})
+      if params[:line_ids] != nil
+        params[:line_ids].each do |lineId|
+          @station.stops.create({station_id: @station.id, line_id: lineId})
+        end
       end
 
       flash[:notice] = "#{@station.name.capitalize} has been saved"
       redirect_to station_path(@station)
+
     else
-      render 'index'
+      redirect_to stations_path
     end
   end
 
@@ -35,10 +35,14 @@ class StationsController < ApplicationController
 
   def update
     @station = Station.find(params[:id])
-    if @station.update(params[:station])
+    if @station.update(params.require(:station).permit(:name))
+      if @station.stops[0] != nil
+        stops_to_destroy = Stop.where("station_id = #{@station.id}")
+        stops_to_destroy.each { |stop| stop.destroy }
+      end
 
       params[:line_ids].each do |lineId|
-        @station.stops.create({station_id: @station.id, line_id: lineId})
+        Stop.create({station_id: @station.id, line_id: lineId})
       end
 
       flash[:notice] = "#{@station.name.capitalize} has been updated"

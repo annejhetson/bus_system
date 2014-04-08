@@ -3,8 +3,12 @@
 <h1 class="jumbotron"><%= @line.name.capitalize %> Line</h1>
 <h3>Stations</h3>
 <ul>
-  <% @line.stops.each do |stop| %>
-    <li><%= link_to Station.find(stop.station_id).name, station_path(stop.station_id) %></li>
+  <% if @line.stops[0] != nil %>
+    <% @line.stops.each do |stop| %>
+      <li><%= link_to Station.find(stop.station_id).name, station_path(stop.station_id) %></li>
+    <% end %>
+  <% else %>
+    <p><em>This line has no stops.</em></p>
   <% end %>
 </ul>
 

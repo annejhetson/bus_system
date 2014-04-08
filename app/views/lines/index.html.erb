@@ -12,4 +12,6 @@
 <hr>
 
 <h3>Add new line</h3>
-<%= render 'form', object: @line %>
+
+<%= render('layouts/errors', :object => @line) %>
+<%= render 'form' %>
