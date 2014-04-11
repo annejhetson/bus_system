@@ -1,0 +1,12 @@
+<h3>Search Results</h3>
+
+
+<% @found_stations.each do|station| %>
+	<%= link_to station.name, station_path(station) %>
+<% end %>
+
+<% @found_lines.each do|line| %>
+	<%= link_to line.name, line_path(line) %>
+<% end %>
+
+<p><%= link_to "Back to All Stations", stations_path, :class => "btn btn-primary", :id => "margin" %></p>

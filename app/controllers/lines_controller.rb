@@ -15,11 +15,11 @@ class LinesController < ApplicationController
           @line.stops.create({station_id: stationID, line_id: @line.id})
         end
       end
-
       flash[:notice] = "#{@line.name.capitalize} has been saved"
       redirect_to line_path(@line)
 
     else
+      flash[:notice] = "error"
       render 'index'
     end
   end

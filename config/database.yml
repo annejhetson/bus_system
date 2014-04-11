@@ -1,7 +1,11 @@
 development:
   adapter: postgresql
   database: bus_timetable_development
+  username: postgres
+  password: ayanami
 
 test:
   adapter: postgresql
   database: bus_timetable_test
+  username: postgres
+  password: ayanami

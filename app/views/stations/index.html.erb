@@ -5,12 +5,10 @@
 <h2>All stations</h2>
 <ul>
   <% @stations.each do |station| %>
-    <li><%= link_to station.name, station_path(station) %></li>
+    <li><%= link_to station.name.capitalize, station_path(station) %></li>
   <% end %>
 </ul>
-
 <hr>
-
 <h3>Add new station</h3>
 
 <%= render('layouts/errors', :object => @station) %>
